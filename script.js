@@ -5,6 +5,7 @@ function Book(title, author) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
+    this.read = false; // Default to unread
 }
 
 function addBookToLibrary(bookData) {
@@ -34,6 +35,9 @@ function displayLibrary() {
             <div class="book-title">${book.title}</div>
             <div class="book-author">by ${book.author}</div>
             <div class="book-id">ID: ${book.id}</div>
+            <button class="read-status ${book.read ? 'read' : 'unread'}" data-book-id="${book.id}">
+                ${book.read ? 'Read' : 'Unread'}
+            </button>
             <button class="remove-book" data-book-id="${book.id}" data-index="${index}">Remove</button>
         `;
         
@@ -42,6 +46,8 @@ function displayLibrary() {
     
     // Add event listeners to all remove buttons
     setupRemoveButtons();
+    // Add event listeners to all read status buttons
+    setupReadButtons();
 }
 
 // Example usage - add some sample books and display them
@@ -124,6 +130,30 @@ function removeBookFromLibrary(bookId) {
     if (bookIndex !== -1) {
         // Remove the book from the array
         myLibrary.splice(bookIndex, 1);
+        
+        // Refresh the display
+        displayLibrary();
+    }
+}
+
+function setupReadButtons() {
+    const readButtons = document.querySelectorAll('.read-status');
+    
+    readButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const bookId = this.getAttribute('data-book-id');
+            toggleReadStatus(bookId);
+        });
+    });
+}
+
+function toggleReadStatus(bookId) {
+    // Find the book with the given ID
+    const book = myLibrary.find(book => book.id === bookId);
+    
+    if (book) {
+        // Toggle the read status
+        book.read = !book.read;
         
         // Refresh the display
         displayLibrary();

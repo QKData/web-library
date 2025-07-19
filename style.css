@@ -180,3 +180,41 @@ h1 {
     background-color: #7f8c8d;
     transform: translateY(-2px);
 }
+
+/* Read status button styles */
+.read-status {
+    display: flex;
+    justify-self: end;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 5px 0 0;
+    transition: all 0.3s ease;
+}
+
+.read-status.unread {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.read-status.unread:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.read-status.read {
+    background-color: #27ae60;
+    color: white;
+}
+
+.read-status.read:hover {
+    background-color: #229954;
+    transform: translateY(-2px);
+}
+
+.remove-book {
+    margin: 10px 0 0 5px;
+}
