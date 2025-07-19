@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
     color: #333;
 }
@@ -39,7 +39,20 @@ h1 {
     border-left: 4px solid #3498db;
 }
 
-.book-card:hover {
+#new-book {
+    background: rgb(6, 160, 6);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-self: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.book-card:hover, #new-book:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
@@ -72,4 +85,98 @@ h1 {
     color: #7f8c8d;
     font-size: 1.2rem;
     margin-top: 50px;
+}
+
+.remove-book {
+    display: flex;
+    justify-self: end;
+    background: #ad0914;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Form styles */
+.form-container {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-container h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ecf0f1;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.form-buttons button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-buttons button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+}
+
+.form-buttons button[type="submit"]:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.form-buttons button[type="button"] {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.form-buttons button[type="button"]:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
 }
