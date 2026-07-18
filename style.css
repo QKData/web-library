@@ -218,3 +218,7 @@ h1 {
 .remove-book {
     margin: 10px 0 0 5px;
 }
+
+.submitted input:invalid {
+    outline: red solid 3px;
+}

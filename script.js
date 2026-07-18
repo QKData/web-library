@@ -112,38 +112,65 @@ function setupFormHandlers() {
     const formContainer = document.getElementById('book-form-container');
     const bookForm = document.getElementById('book-form');
     const cancelBtn = document.getElementById('cancel-form');
+    const titleInput = document.getElementById('book-title');
+    const authorInput = document.getElementById('book-author');
+    bookForm.noValidate = true;
+
+    function validateRequiredInput(input, message) {
+        input.setCustomValidity(input.value.trim() ? '' : message);
+    }
     
     // Show form when "New Book" button is clicked
     newBookBtn.addEventListener('click', function() {
         formContainer.style.display = 'block';
-        document.getElementById('book-title').focus();
+        bookForm.classList.remove('submitted');
+        titleInput.focus();
     });
+
+    function clearValidationState() {
+        bookForm.classList.remove('submitted');
+        titleInput.setCustomValidity('');
+        authorInput.setCustomValidity('');
+    }
+
+    titleInput.addEventListener('input', clearValidationState);
+    authorInput.addEventListener('input', clearValidationState);
     
     // Hide form when "Cancel" button is clicked
     cancelBtn.addEventListener('click', function() {
         formContainer.style.display = 'none';
         bookForm.reset(); // Clear form fields
+        clearValidationState();
     });
     
     // Handle form submission
     bookForm.addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent default form submission
+        bookForm.classList.add('submitted');
         
-        const title = document.getElementById('book-title').value.trim();
-        const author = document.getElementById('book-author').value.trim();
-        
-        if (title && author) {
-            // Create new book and add to library
-            const newBook = new Book(title, author);
-            myLibrary.addBook(newBook);
-            
-            // Refresh the display
-            myLibrary.displayLibrary();
-            
-            // Hide form and reset
-            formContainer.style.display = 'none';
-            bookForm.reset();
+        validateRequiredInput(titleInput, 'The title must be filled!');
+        validateRequiredInput(authorInput, 'The author name must be filled!');
+
+        if (!bookForm.checkValidity()) {
+            bookForm.reportValidity();
+            return;
         }
+
+        const title = titleInput.value.trim();
+        const author = authorInput.value.trim();
+        
+        // Create new book and add to library
+        const newBook = new Book(title, author);
+        myLibrary.addBook(newBook);
+        
+        // Refresh the display
+        myLibrary.displayLibrary();
+        
+        // Hide form and reset
+        formContainer.style.display = 'none';
+        bookForm.reset();
+        titleInput.setCustomValidity('');
+        authorInput.setCustomValidity('');
     });
 }
 
